@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>CALCULO DEL PAGO DE SERVICIOS LUMBRERAS 166</title>
+		<meta charset="utf-8" />
+		<meta name="description" content="SOFU Webapp" />
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+		
+		<style>
+			.titleBand {
+				
+			}
+		</style>
+	</head>
+	<body>
+		<div class="titleBand">
+			CALCULO DEL PAGO DE SERVICIOS:
+		</div>
+		
+		<br>
+		
+		<div style="margin: 0 auto !important; background: Gold; padding: 10px;">
+			<div>
+				<table style="width:30%">
+					<tr>
+						<td>
+							<label>Luz</label>
+						</td>
+						<td>
+							<input id="mtoLuz" type="text">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<label>Agua</label>
+						</td>
+						<td>
+							<input id="mtoAgua" type="text">
+						</td>
+					</tr>
+				</table>
+				
+				<br>
+				<br>
+				
+				<button onclick="calcular()">Calcular</button>
+				
+				<br>
+				<br>
+				
+				<table style="width:100%">
+				  <tr>
+				    <th>1er Piso (34.91%)</th>
+				    <th>2do Piso (21.77%)</th> 
+				    <th>3er Piso (21.44%)</th>
+				    <th>4to Piso (22.20%)</th>
+				  </tr>
+				  <tr>
+				    <td>
+				    	<table style="width:100%">
+				    		<tr>
+				    			<th>LUZ</th>
+				    			<th>AGUA</th>
+				    		</tr>
+				    		<tr>
+				    			<td><div id="divLuz1" style="text-align: center;">-</div></td>
+				    			<td><div id="divAgua1" style="text-align: center;">-</div></td>
+				    		</tr>
+				    	</table>
+				    	<div id="total1" style="border: 1px solid; text-align: center;">TOTAL: </div>
+				    </td>
+				    <td>
+				    	<table style="width:100%">
+				    		<tr>
+				    			<th>LUZ</th>
+				    			<th>AGUA</th>
+				    		</tr>
+				    		<tr>
+				    			<td><div id="divLuz2" style="text-align: center;">-</div></td>
+				    			<td><div id="divAgua2" style="text-align: center;">-</div></td>
+				    		</tr>
+				    	</table>
+				    	<div id="total2" style="border: 1px solid; text-align: center;">TOTAL: </div>
+				    </td> 
+				    <td>
+				    	<table style="width:100%">
+				    		<tr>
+				    			<th>LUZ</th>
+				    			<th>AGUA</th>
+				    		</tr>
+				    		<tr>
+				    			<td><div id="divLuz3" style="text-align: center;">-</div></td>
+				    			<td><div id="divAgua3" style="text-align: center;">-</div></td>
+				    		</tr>
+				    	</table>
+				    	<div id="total3" style="border: 1px solid; text-align: center;">TOTAL: </div>
+				    </td>
+				    <td>
+				    	<table style="width:100%">
+				    		<tr>
+				    			<th>LUZ</th>
+				    			<th>AGUA</th>
+				    		</tr>
+				    		<tr>
+				    			<td><div id="divLuz4" style="text-align: center;">-</div></td>
+				    			<td><div id="divAgua4" style="text-align: center;">-</div></td>
+				    		</tr>
+				    	</table>
+				    	<div id="total4" style="border: 1px solid; text-align: center;">TOTAL: </div>
+				    </td>
+				  </tr>
+				</table>
+			</div>
+		</div>
+		
+		<script>
+			//jenry
+			//43 - bomba
+			//40 - 2do piso (eduardo)
+			//10 - 2do piso (torres)
+				
+			var sZERO = "0.0";
+			var dZero = 0.0;
+			
+			var ptjDividoSeg = 21.77 / 3;
+			
+			var ptjPri = (34.91 + ptjDividoSeg ) / 100;
+			var ptjSeg = 0.0; //(0.0 + 21.77; ) / 100;
+			var ptjTer = (21.44 + ptjDividoSeg ) / 100;
+			var ptjCua = (22.20 + ptjDividoSeg ) / 100;
+
+			
+			function calcular(){
+				var mtoLuz = parseFloat($("#mtoLuz").val() ? $("#mtoLuz").val() : sZERO);
+				var mtoAgua = parseFloat($("#mtoAgua").val() ? $("#mtoAgua").val() : sZERO);
+				var mtoTotal = 0.0;
+			
+				if (mtoLuz == dZero && mtoAgua == dZero) {
+					alert("Ingresar al menos un monto de recibo.");
+					return false;
+				}
+				
+				$("#divLuz1").html((mtoLuz*ptjPri).toFixed(2));
+				$("#divAgua1").html((mtoAgua*ptjPri).toFixed(2));
+				mtoTotal = (mtoLuz*ptjPri) + (mtoAgua*ptjPri);
+				$("#total1").html("TOTAL: <span style='font-weight:bold'>"+mtoTotal.toFixed(2))+"</span>";
+
+				//$("#divLuz2").html((mtoLuz*21.77/100).toFixed(2));
+				//$("#divAgua2").html((mtoAgua*21.77/100).toFixed(2));
+				//mtoTotal = (mtoLuz*21.77/100) + (mtoAgua*21.77/100);
+				//$("#total2").html("TOTAL: <span style='font-weight:bold'>"+mtoTotal.toFixed(2))+"</span>";
+				
+				$("#divLuz3").html((mtoLuz * ptjTer).toFixed(2));
+				$("#divAgua3").html((mtoAgua*ptjTer).toFixed(2));
+				mtoTotal = (mtoLuz * ptjTer) + (mtoAgua*ptjTer);
+				$("#total3").html("TOTAL: <span style='font-weight:bold'>"+mtoTotal.toFixed(2))+"</span>";
+
+				$("#divLuz4").html((mtoLuz*ptjCua).toFixed(2));
+				$("#divAgua4").html((mtoAgua*ptjCua).toFixed(2));
+				mtoTotal = (mtoLuz*ptjCua) + (mtoAgua*ptjCua);
+				$("#total4").html("TOTAL: <span style='font-weight:bold'>"+mtoTotal.toFixed(2))+"</span>";
+			}
+		</script>
+	</body>
+</html>
